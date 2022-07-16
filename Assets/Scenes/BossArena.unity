@@ -1763,6 +1763,7 @@ GameObject:
   - component: {fileID: 2049808304}
   - component: {fileID: 2049808306}
   - component: {fileID: 2049808305}
+  - component: {fileID: 2049808307}
   m_Layer: 0
   m_Name: Pull
   m_TagString: Untagged
@@ -1827,7 +1828,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2049808307}
+        m_TargetAssemblyTypeName: Roller, Assembly-CSharp
+        m_MethodName: Rolls
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!212 &2049808306
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1879,6 +1892,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2049808307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2049808303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ddea8fff66945b40952fba74e1bf09d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roll1: {fileID: 2112982109}
+  roll2: {fileID: 1393375755}
+  roll3: {fileID: 1814633419}
 --- !u!1 &2112982109
 GameObject:
   m_ObjectHideFlags: 0
