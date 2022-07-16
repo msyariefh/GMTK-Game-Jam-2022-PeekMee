@@ -53,8 +53,8 @@ public class Roller : MonoBehaviour
         if (random >= 1 && random <= 60) return Items.SWORD;
         if (random >= 61 && random <= 70) return Items.SHIELD;
         if (random >= 71 && random <= 100) return Items.POTION;
-        if (random == 101) return Items.SEVEN;
-        if (random >= 102 && random <= 126) return Items.POISON;
+        if (random >= 101 && random <= 103) return Items.SEVEN;
+        if (random >= 104 && random <= 126) return Items.POISON;
         if (random >= 127 && random <= 141) return Items.MAGIC;
 
         return Items.SWORD;

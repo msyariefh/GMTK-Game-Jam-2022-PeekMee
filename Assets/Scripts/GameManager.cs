@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     private UnitStats playerStats;
     private UnitStats enemyStats;
 
-    private bool isAttacking = false;
+    private bool isAttacking = true;
 
 
     [HideInInspector] public InGameState stateInGame;
