@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class GameManager : MonoBehaviour
 
     private UnitStats playerStats;
     private UnitStats enemyStats;
+
+    private bool isAttacking = false;
 
 
     [HideInInspector] public InGameState stateInGame;
@@ -42,9 +45,15 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         stateInGame = InGameState.START;
-        playerStats = playerPrefab.GetComponent<UnitStats>();
-        enemyStats = EnemyPrefab.GetComponent<UnitStats>();
+        //playerStats = playerPrefab.GetComponent<UnitStats>();
+        //enemyStats = EnemyPrefab.GetComponent<UnitStats>();
         SetUpBattle();
+    }
+
+    private void Update()
+    {
+        if (isAttacking == true) return;
+        Battle();
     }
 
     private void SetUpBattle()
@@ -58,17 +67,42 @@ public class GameManager : MonoBehaviour
 
     public void Battle()
     {
+        Roller roll = FindObjectOfType<Roller>();
+        roll.Rolls();
+
+        Roller.Items[] gacha = roll.jackpot;
+        var duplicates = gacha.GroupBy(x => x).Where(y => y.Count() > 1).Select(y => y.Key);
+        
+
+        int multiplier = 0;
+        if (duplicates.Count() > 0)
+        {
+            print(duplicates.ToList()[0]);
+            foreach (Roller.Items i in gacha)
+            {
+                if(i == duplicates.ToList()[0]) { multiplier++; }
+            }
+        }
+        print(multiplier);
+
         switch (stateInGame)
         {
             case InGameState.PLAYERTURN:
                 break;
             case InGameState.ENEMYTURN:
                 break;
+            case InGameState.START:
+                break;
+            case InGameState.LOST:
+                break;
+            case InGameState.WON:
+                break;
         }
+        isAttacking = true;
     }
 
-    public void Attack()
+    public void TestRoll()
     {
-
+        isAttacking = false;
     }
 }

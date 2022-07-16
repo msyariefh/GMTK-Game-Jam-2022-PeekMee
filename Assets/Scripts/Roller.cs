@@ -22,7 +22,7 @@ public class Roller : MonoBehaviour
         POISON
     }
 
-    private Items[] jackpot;
+    [HideInInspector] public Items[] jackpot;
     private void Start()
     {
         roll1Sprite = roll1.GetComponent<SpriteRenderer>();
@@ -44,7 +44,8 @@ public class Roller : MonoBehaviour
         jackpot[1] = CheckPrize(slotB);
         jackpot[2] = CheckPrize(slotC);
 
-        PrintPrize();
+        print(jackpot[0] + " | " + jackpot[1] + " | " + jackpot[2]);
+
     }
 
     public Items CheckPrize(int random)
@@ -59,8 +60,5 @@ public class Roller : MonoBehaviour
         return Items.SWORD;
     }
 
-    public void PrintPrize()
-    {
-        Debug.Log(jackpot[0] + " | "+ jackpot[1] + " | " + jackpot[2] );
-    }
+    
 }
