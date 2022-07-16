@@ -4,31 +4,49 @@ using UnityEngine;
 
 public class UnitStats : MonoBehaviour
 {
+    public string nameI;
     public int maxHP;
     private int currentHP;
+    [HideInInspector] public bool isShielded = false;
     [SerializeField] private int basicAttack;
     [SerializeField] private int specialAttackPercentage;
     [SerializeField] private int regenHP;
 
+    private void Awake()
+    {
+        currentHP = maxHP;
+    }
 
     public void Attack (UnitStats other, int multiplication)
     {
-        if (other.currentHP - basicAttack*multiplication <= 0)
-        {
-            // WON!
-            return;
-        }
         other.Attacked(basicAttack * multiplication);
+        print(nameI + " Attack " + other.nameI + " by " + (basicAttack * multiplication));
     }
 
     public void Attacked(int attackPoint)
     {
-        currentHP -= attackPoint;
+        int afterShielded = attackPoint;
+        if (isShielded == true)
+        {
+            afterShielded -= Mathf.FloorToInt(30 / 100f * attackPoint);
+            print(nameI + " Have a shield! ");
+            isShielded = false;
+        }
+        if (currentHP - afterShielded <= 0)
+        {
+            // DIE!
+            print(nameI + " DIED!");
+            currentHP = 0;
+            return ;
+        }
+        currentHP -= afterShielded;
+
     }
 
-    public void Heal(int percentage)
+    public void Heal(int percentage, int multiplication)
     {
-        int addHealth = Mathf.FloorToInt(percentage / 100 * currentHP);
+        float a = percentage / 100f * maxHP * (multiplication / 2f);
+        int addHealth = Mathf.FloorToInt(a);
         if (currentHP + addHealth >= maxHP)
         {
             currentHP = maxHP;
@@ -37,10 +55,17 @@ public class UnitStats : MonoBehaviour
         {
             currentHP += addHealth;
         }
+        print(nameI + "Being Healed by " + addHealth + " HP");
     }
 
     public void SpecialAttack(UnitStats other)
     {
-        other.Attacked(Mathf.FloorToInt(other.maxHP * specialAttackPercentage / 100));
+        other.Attacked(Mathf.FloorToInt(other.maxHP * specialAttackPercentage / 100f));
+        print(nameI + "  launch special attack to" + other.nameI + " by " + (other.maxHP * specialAttackPercentage / 100f));
+    }
+
+    public int GetCurrentHP()
+    {
+        return currentHP;
     }
 }

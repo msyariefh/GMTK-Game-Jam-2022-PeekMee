@@ -28,32 +28,19 @@ public class GameManager : MonoBehaviour
         WON
     }
 
-    //public static GameManager Instance;
-
-    //private void Awake()
-    //{
-    //    if (Instance == null) Instance = this;
-    //    else
-    //    {
-    //        Destroy(gameObject);
-    //        return;
-    //    }
-
-    //    DontDestroyOnLoad(gameObject);
-    //}
 
     private void Awake()
     {
         stateInGame = InGameState.START;
-        //playerStats = playerPrefab.GetComponent<UnitStats>();
-        //enemyStats = EnemyPrefab.GetComponent<UnitStats>();
+        playerStats = playerPrefab.GetComponent<UnitStats>();
+        enemyStats = EnemyPrefab.GetComponent<UnitStats>();
         SetUpBattle();
     }
 
     private void Update()
     {
-        if (isAttacking == true) return;
-        Battle();
+        //if (isAttacking == true) return;
+        //Battle();
     }
 
     private void SetUpBattle()
@@ -67,42 +54,58 @@ public class GameManager : MonoBehaviour
 
     public void Battle()
     {
+        isAttacking = true;
         Roller roll = FindObjectOfType<Roller>();
         roll.Rolls();
 
         Roller.Items[] gacha = roll.jackpot;
         var duplicates = gacha.GroupBy(x => x).Where(y => y.Count() > 1).Select(y => y.Key);
         
-
-        int multiplier = 0;
-        if (duplicates.Count() > 0)
+        if (duplicates.Count() < 1) 
         {
-            print(duplicates.ToList()[0]);
-            foreach (Roller.Items i in gacha)
+            enemyStats.Attack(playerStats, 1);
+            print("Player HP: " + playerStats.GetCurrentHP());
+            print("Enemy HP: " + enemyStats.GetCurrentHP());
+            return; 
+        }
+        int multiplier = 0;
+        foreach (Roller.Items i in gacha)
+        {
+            if (i == duplicates.ToList()[0]) { multiplier++; }
+        }
+
+        if (multiplier > 0)
+        {
+            // Results from gacha
+            switch (duplicates.ToList()[0])
             {
-                if(i == duplicates.ToList()[0]) { multiplier++; }
+                case Roller.Items.MAGIC:
+                    playerStats.SpecialAttack(enemyStats);
+                    break;
+                case Roller.Items.POISON:
+                    if (multiplier == 2) enemyStats.Attack(playerStats, 2);
+                    else if (multiplier == 3) enemyStats.SpecialAttack(playerStats);
+                    break;
+                case Roller.Items.POTION:
+                    playerStats.Heal(potionPercentage, multiplier);
+                    break;
+                case Roller.Items.SEVEN:
+                    if (multiplier == 2) playerStats.Attack(enemyStats, 2);
+                    else if (multiplier == 3) playerStats.SpecialAttack(enemyStats);
+                    break;
+                case Roller.Items.SHIELD:
+                    playerStats.isShielded = true;
+                    break;
+                case Roller.Items.SWORD:
+                    if (multiplier == 2) playerStats.Attack(enemyStats, 1);
+                    else if (multiplier == 3) playerStats.Attack(enemyStats, 3);
+                    break;
             }
         }
-        print(multiplier);
-
-        switch (stateInGame)
-        {
-            case InGameState.PLAYERTURN:
-                break;
-            case InGameState.ENEMYTURN:
-                break;
-            case InGameState.START:
-                break;
-            case InGameState.LOST:
-                break;
-            case InGameState.WON:
-                break;
-        }
-        isAttacking = true;
-    }
-
-    public void TestRoll()
-    {
+        enemyStats.Attack(playerStats, 1);
+        print("Player HP: " + playerStats.GetCurrentHP());
+        print("Enemy HP: " + enemyStats.GetCurrentHP());
         isAttacking = false;
     }
+
 }
