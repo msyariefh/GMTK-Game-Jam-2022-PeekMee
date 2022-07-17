@@ -8,6 +8,7 @@ public class UnitStats : MonoBehaviour
     public int maxHP;
     private int currentHP;
     private int _currentHP;
+    [HideInInspector] public string comment;
     [HideInInspector] public bool isShielded = false;
     [SerializeField] private int basicAttack;
     [SerializeField] private int specialAttackPercentage;
@@ -16,6 +17,7 @@ public class UnitStats : MonoBehaviour
     private void Awake()
     {
         currentHP = maxHP;
+        _currentHP = currentHP;
     }
 
     private void Update()
@@ -30,7 +32,7 @@ public class UnitStats : MonoBehaviour
     public void Attack (UnitStats other, int multiplication)
     {
         other.Attacked(basicAttack * multiplication);
-        print(nameI + " Attack " + other.nameI + " by " + (basicAttack * multiplication));
+        comment = nameI + " Attack " + other.nameI + " by " + (basicAttack * multiplication);
     }
 
     public void Attacked(int attackPoint)
@@ -65,13 +67,13 @@ public class UnitStats : MonoBehaviour
         {
             currentHP += addHealth;
         }
-        print(nameI + "Being Healed by " + addHealth + " HP");
+        comment = nameI + "Being Healed by " + addHealth + " HP";
     }
 
     public void SpecialAttack(UnitStats other)
     {
         other.Attacked(Mathf.FloorToInt(other.maxHP * specialAttackPercentage / 100f));
-        print(nameI + "  launch special attack to" + other.nameI + " by " + (other.maxHP * specialAttackPercentage / 100f));
+        comment = nameI + "  launch special attack to " + other.nameI + " by " + (other.maxHP * specialAttackPercentage / 100f);
     }
 
     public int GetCurrentHP()

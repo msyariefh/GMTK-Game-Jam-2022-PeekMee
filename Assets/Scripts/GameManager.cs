@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    public TMP_Text comment;
     // Item Stats
     public int potionPercentage; // Increase Player HP by percentage
     public int poisonPercentage; // Decrease Player HP by percentage continous up to 3 turns
@@ -64,6 +66,7 @@ public class GameManager : MonoBehaviour
         if (duplicates.Count() < 1) 
         {
             enemyStats.Attack(playerStats, 1);
+            comment.text += "\n"+enemyStats.comment;
             print("Player HP: " + playerStats.GetCurrentHP());
             print("Enemy HP: " + enemyStats.GetCurrentHP());
             return; 
@@ -81,28 +84,36 @@ public class GameManager : MonoBehaviour
             {
                 case Roller.Items.MAGIC:
                     playerStats.SpecialAttack(enemyStats);
+                    comment.text += "\n" + playerStats.comment;
                     break;
                 case Roller.Items.POISON:
-                    if (multiplier == 2) enemyStats.Attack(playerStats, 2);
+                    if (multiplier == 2) enemyStats.Attack(playerStats, 3);
                     else if (multiplier == 3) enemyStats.SpecialAttack(playerStats);
+                    comment.text += "\n" + enemyStats.comment;
                     break;
                 case Roller.Items.POTION:
                     playerStats.Heal(potionPercentage, multiplier);
+                    comment.text += "\n" + playerStats.comment;
                     break;
                 case Roller.Items.SEVEN:
                     if (multiplier == 2) playerStats.Attack(enemyStats, 2);
                     else if (multiplier == 3) playerStats.SpecialAttack(enemyStats);
+                    comment.text += "\n" + playerStats.comment;
                     break;
                 case Roller.Items.SHIELD:
                     playerStats.isShielded = true;
+                    comment.text += "\n" + playerStats.name + " Got a shield!";
                     break;
                 case Roller.Items.SWORD:
                     if (multiplier == 2) playerStats.Attack(enemyStats, 1);
                     else if (multiplier == 3) playerStats.Attack(enemyStats, 3);
+                    comment.text += "\n" + playerStats.comment;
                     break;
             }
+            //comment.text = playerStats.comment;
         }
-        enemyStats.Attack(playerStats, 1);
+        //enemyStats.Attack(playerStats, 1);
+        //comment.text = enemyStats.comment;
         print("Player HP: " + playerStats.GetCurrentHP());
         print("Enemy HP: " + enemyStats.GetCurrentHP());
         isAttacking = false;
