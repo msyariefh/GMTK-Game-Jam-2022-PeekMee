@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
@@ -23,7 +22,7 @@ public class Roller : MonoBehaviour
     private Image roll2Image;
     private Image roll3Image;
 
-    public AnimatorController RollAnm;
+    public RuntimeAnimatorController RollAnm;
     public GameObject EnemyAnm;
 
     private SpriteRenderer roll1Sprite;
