@@ -7,6 +7,7 @@ public class UnitStats : MonoBehaviour
     public string nameI;
     public int maxHP;
     private int currentHP;
+    private int _currentHP;
     [HideInInspector] public bool isShielded = false;
     [SerializeField] private int basicAttack;
     [SerializeField] private int specialAttackPercentage;
@@ -15,6 +16,15 @@ public class UnitStats : MonoBehaviour
     private void Awake()
     {
         currentHP = maxHP;
+    }
+
+    private void Update()
+    {
+        if (currentHP != _currentHP && OnHPChange != null)
+        {
+            _currentHP = currentHP;
+            OnHPChange(_currentHP);
+        }
     }
 
     public void Attack (UnitStats other, int multiplication)
@@ -68,4 +78,7 @@ public class UnitStats : MonoBehaviour
     {
         return currentHP;
     }
+
+    public delegate void OnHPChangeDelegate(int newHPVal);
+    public event OnHPChangeDelegate OnHPChange;
 }
