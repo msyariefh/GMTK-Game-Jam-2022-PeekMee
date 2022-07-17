@@ -1,9 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class SliderScript : MonoBehaviour
 {
     public GameObject unit;
+    public TMP_Text text;
     private UnitStats objectStats;
     private bool isAnimating = false;
     private Slider slider;
@@ -15,6 +17,7 @@ public class SliderScript : MonoBehaviour
         slider.maxValue = objectStats.maxHP;
         //slider.value = objectStats.maxHP;
         StartAnimation();
+        text.text = "HP: " + Mathf.FloorToInt(slider.maxValue) + "/" + slider.maxValue;
         objectStats.OnHPChange += HPChangeHandler;
     }
 
@@ -33,6 +36,8 @@ public class SliderScript : MonoBehaviour
         LeanTween.value(slider.value, to, .5f)
             .setOnUpdate((float val) => slider.value = val)
             .setOnComplete(() => isAnimating = false);
+        LeanTween.value(slider.value, to, .5f)
+            .setOnUpdate((float val) => { text.text = "HP: " + Mathf.FloorToInt(val) + "/" + slider.maxValue; });
     }
 
     private void HPChangeHandler(int newHPValue)

@@ -1,0 +1,138 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1354513277208883495
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1354513277208883489}
+  - component: {fileID: 1354513277208883494}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1354513277208883489
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354513277208883495}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1167.0548, y: 552.80194, z: -147.43112}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1354513277208883494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354513277208883495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b67f89c07df7c814b9e5f6ea68089614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Menu
+    audioClip: {fileID: 8300000, guid: 18b9902b5b5631447ac908ca7cffc7e6, type: 3}
+    volume: 0.4
+    loop: 1
+    isBGM: 1
+    audioSource: {fileID: 0}
+    audioMixer: {fileID: 0}
+  - name: Arena
+    audioClip: {fileID: 8300000, guid: 42e849e1c97555240ba1bf4e47023954, type: 3}
+    volume: 0.4
+    loop: 1
+    isBGM: 1
+    audioSource: {fileID: 0}
+    audioMixer: {fileID: 0}
+  - name: Heal
+    audioClip: {fileID: 8300000, guid: e3971247e49ac994aba5387827c11bff, type: 3}
+    volume: 1
+    loop: 0
+    isBGM: 0
+    audioSource: {fileID: 0}
+    audioMixer: {fileID: 0}
+  - name: Absorb
+    audioClip: {fileID: 8300000, guid: b5dd2d5842fe6d648b9571f58f89641b, type: 3}
+    volume: 1
+    loop: 0
+    isBGM: 0
+    audioSource: {fileID: 0}
+    audioMixer: {fileID: 0}
+  - name: Debuff
+    audioClip: {fileID: 8300000, guid: 46fe42baf6df8374d838b23c35d14e27, type: 3}
+    volume: 1
+    loop: 0
+    isBGM: 0
+    audioSource: {fileID: 0}
+    audioMixer: {fileID: 0}
+  - name: Buff
+    audioClip: {fileID: 8300000, guid: b5d1e24cb44d1e84ab351dd8023e5e8a, type: 3}
+    volume: 1
+    loop: 0
+    isBGM: 0
+    audioSource: {fileID: 0}
+    audioMixer: {fileID: 0}
+  - name: AttackPlayer
+    audioClip: {fileID: 8300000, guid: 2f151bb90ec5b04458af26f5b67643c1, type: 3}
+    volume: 1
+    loop: 0
+    isBGM: 0
+    audioSource: {fileID: 0}
+    audioMixer: {fileID: 0}
+  - name: LeverSlot
+    audioClip: {fileID: 8300000, guid: b67ce5482f2b444439d671831836058c, type: 3}
+    volume: 0.6
+    loop: 0
+    isBGM: 0
+    audioSource: {fileID: 0}
+    audioMixer: {fileID: 0}
+  - name: RollSlot
+    audioClip: {fileID: 8300000, guid: ce6e5e1957aa26944b0a7bd9d7cbed05, type: 3}
+    volume: 0.2
+    loop: 0
+    isBGM: 0
+    audioSource: {fileID: 0}
+    audioMixer: {fileID: 0}
+  - name: Jackpot
+    audioClip: {fileID: 8300000, guid: 1588d4163c7017447951030997d8be18, type: 3}
+    volume: 1
+    loop: 0
+    isBGM: 0
+    audioSource: {fileID: 0}
+    audioMixer: {fileID: 0}
+  - name: EnemyAttack
+    audioClip: {fileID: 8300000, guid: a07d05f98fe6a6c45862fb0bb093591c, type: 3}
+    volume: 1
+    loop: 0
+    isBGM: 0
+    audioSource: {fileID: 0}
+    audioMixer: {fileID: 0}
+  - name: Victory
+    audioClip: {fileID: 8300000, guid: faa4984cf0e4a4d41a5083d77cc0cf20, type: 3}
+    volume: 0.6
+    loop: 0
+    isBGM: 1
+    audioSource: {fileID: 0}
+    audioMixer: {fileID: 0}
+  - name: Lose
+    audioClip: {fileID: 8300000, guid: 89acc951bd625fa4fac4d9820b0b4a29, type: 3}
+    volume: 0.6
+    loop: 0
+    isBGM: 1
+    audioSource: {fileID: 0}
+    audioMixer: {fileID: 0}
+  mixerGroup: {fileID: 0}

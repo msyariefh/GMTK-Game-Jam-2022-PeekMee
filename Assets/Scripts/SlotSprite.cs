@@ -7,6 +7,6 @@ using UnityEngine.UI;
 public class SlotSprite 
 {
     public Roller.Items type;
-    public Image image;
+    public Sprite sprite;
 
 }
